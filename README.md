@@ -13,7 +13,7 @@ https://github.com/user-attachments/assets/1e440ace-8560-4e12-850e-c532740711e7
 ## Features
 
 - **AI-Powered Script Generation** - Automatically generates engaging scripts from any topic
-- **Multiple LLM Providers** - Choose from OpenAI, Groq, or Google Gemini
+- **Multiple LLM Providers** - Choose from OpenAI, Groq, Google Gemini, or MiniMax
 - **Text-to-Speech** - Natural-sounding voiceovers with EdgeTTS (free) or ElevenLabs
 - **Automatic B-Roll** - Fetches relevant background videos from Pexels
 - **Customizable Captions** - Full control over font, color, position, and styling
@@ -81,13 +81,14 @@ All settings are configured via the `.env` file. Copy `.env.example` to get star
 | OpenAI | If using OpenAI | [platform.openai.com](https://platform.openai.com/api-keys) |
 | Groq | If using Groq | [console.groq.com](https://console.groq.com/keys) |
 | Google Gemini | If using Gemini | [makersuite.google.com](https://makersuite.google.com/app/apikey) |
+| MiniMax | If using MiniMax | [platform.minimaxi.com](https://platform.minimaxi.com/user-center/basic-information/interface-key) |
 | Deepgram | If using Deepgram STT | [console.deepgram.com](https://console.deepgram.com/) |
 | ElevenLabs | If using ElevenLabs TTS | [elevenlabs.io](https://elevenlabs.io/) |
 
 ### Provider Selection
 
 ```env
-# LLM Provider: openai, groq, or gemini
+# LLM Provider: openai, groq, gemini, or minimax
 LLM_PROVIDER=openai
 
 # Text-to-Speech: edgetts (free) or elevenlabs
