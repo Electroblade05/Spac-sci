@@ -221,6 +221,9 @@ Looking for a production-ready solution? Our [Premium API](https://docs.vadoo.tv
 
 ## Related Projects
 
+- [MuAPI video-generation docs](https://muapi.ai/docs/video-generation) — API patterns for text-to-video generation.
+- [Veo 3 text-to-video playground](https://muapi.ai/playground/veo3-text-to-video) — Try a production video model in the browser.
+
 | Project | Description |
 |---------|-------------|
 | [AI Influencer Generator](https://github.com/SamurAIGPT/AI-Influencer-Generator) | Create AI-powered virtual influencers |
