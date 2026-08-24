@@ -9,6 +9,9 @@ Generate engaging videos from text prompts using AI. Perfect for creating YouTub
 
 > **Want to skip the setup?** Use our [Premium API](https://docs.vadoo.tv/docs/guide/ai-story/create-an-ai-video) to generate videos instantly - no installation required, production-ready, and scales with your needs.
 
+<p align="center"><a href="https://www.youtube.com/watch?v=SOXsxqnQGlc"><img src="https://i.ytimg.com/vi/SOXsxqnQGlc/maxresdefault.jpg" width="720"></a></p>
+<p align="center"><a href="https://www.youtube.com/watch?v=SOXsxqnQGlc"><b>▶ Watch: Best AI Video Generator (API) in 2026 (Quality, Price, Uncensored, Editing)</b></a></p>
+
 ## Demo
 
 https://github.com/user-attachments/assets/1e440ace-8560-4e12-850e-c532740711e7
