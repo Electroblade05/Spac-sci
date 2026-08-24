@@ -51,30 +51,36 @@ class Config:
     
     def _validate_configuration(self) -> None:
         errors = []
-        
+
         llm_provider = os.getenv('LLM_PROVIDER', '').lower()
-        if llm_provider not in ['openai', 'groq', 'gemini']:
+        if llm_provider not in ['openai', 'groq', 'gemini', 'minimax']:
             errors.append(
-                f"Invalid LLM_PROVIDER: '{llm_provider}'. Must be one of: openai, groq, gemini"
+                f"Invalid LLM_PROVIDER: '{llm_provider}'. Must be one of: openai, groq, gemini, minimax"
             )
-        
+
         if llm_provider == 'openai':
             if not os.getenv('OPENAI_API_KEY'):
                 errors.append("Missing required API key: OPENAI_API_KEY (required for LLM_PROVIDER=openai)")
             if not os.getenv('OPENAI_MODEL'):
                 errors.append("Missing required configuration: OPENAI_MODEL (required for LLM_PROVIDER=openai)")
-        
+
         elif llm_provider == 'groq':
             if not os.getenv('GROQ_API_KEY'):
                 errors.append("Missing required API key: GROQ_API_KEY (required for LLM_PROVIDER=groq)")
             if not os.getenv('GROQ_MODEL'):
                 errors.append("Missing required configuration: GROQ_MODEL (required for LLM_PROVIDER=groq)")
-        
+
         elif llm_provider == 'gemini':
             if not os.getenv('GEMINI_API_KEY'):
                 errors.append("Missing required API key: GEMINI_API_KEY (required for LLM_PROVIDER=gemini)")
             if not os.getenv('GEMINI_MODEL'):
                 errors.append("Missing required configuration: GEMINI_MODEL (required for LLM_PROVIDER=gemini)")
+
+        elif llm_provider == 'minimax':
+            if not os.getenv('MINIMAX_API_KEY'):
+                errors.append("Missing required API key: MINIMAX_API_KEY (required for LLM_PROVIDER=minimax)")
+            if not os.getenv('MINIMAX_MODEL'):
+                errors.append("Missing required configuration: MINIMAX_MODEL (required for LLM_PROVIDER=minimax)")
         
         if not os.getenv('PEXELS_API_KEY') and not os.getenv('MUAPI_API_KEY'):
             errors.append("Missing required API key: PEXELS_API_KEY or MUAPI_API_KEY must be provided")
@@ -109,9 +115,9 @@ class Config:
             error_message += "\nPlease check your .env file and ensure all required keys are set."
             raise ConfigurationError(error_message)
     
-    def get_llm_provider(self) -> Literal['openai', 'groq', 'gemini']:
+    def get_llm_provider(self) -> Literal['openai', 'groq', 'gemini', 'minimax']:
         return os.getenv('LLM_PROVIDER', '').lower()
-    
+
     def get_llm_model(self) -> str:
         provider = self.get_llm_provider()
         if provider == 'openai':
@@ -120,14 +126,16 @@ class Config:
             return os.getenv('GROQ_MODEL', 'llama3-70b-8192')
         elif provider == 'gemini':
             return os.getenv('GEMINI_MODEL', 'gemini-2.5-flash')
+        elif provider == 'minimax':
+            return os.getenv('MINIMAX_MODEL', 'MiniMax-M2.7')
         raise ConfigurationError(f"Unknown LLM provider: {provider}")
-    
+
     def get_llm_client(self):
         if self._llm_client is not None:
             return self._llm_client
-        
+
         provider = self.get_llm_provider()
-        
+
         if provider == 'openai':
             self._llm_client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
         elif provider == 'groq':
@@ -140,7 +148,12 @@ class Config:
             genai.configure(api_key=os.getenv('GEMINI_API_KEY'))
             model_name = os.getenv('GEMINI_MODEL', 'gemini-2.5-flash')
             self._llm_client = genai.GenerativeModel(model_name)
-        
+        elif provider == 'minimax':
+            self._llm_client = OpenAI(
+                api_key=os.getenv('MINIMAX_API_KEY'),
+                base_url="https://api.minimax.io/v1",
+            )
+
         return self._llm_client
     
     def get_stt_provider(self) -> Literal['whisper', 'deepgram']:
